@@ -1,0 +1,223 @@
+{
+  "main": {
+    "id": "65080a488f23e11a",
+    "type": "split",
+    "children": [
+      {
+        "id": "a1bfa7b30a1c3f8d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0780a241951a983a",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "새 탭"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "8a7157ed1676f13d",
+    "type": "split",
+    "children": [
+      {
+        "id": "6d5d9da8814ddf4a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "956241395895a85b",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "파일 탐색기"
+            }
+          },
+          {
+            "id": "f8758ca3944ac704",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "검색"
+            }
+          },
+          {
+            "id": "c56a736bf4a1e140",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "북마크"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "e40101d680fa8286",
+    "type": "split",
+    "children": [
+      {
+        "id": "64385b65cf0730af",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1054b0f062d3de7e",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "백링크"
+            }
+          },
+          {
+            "id": "e3fe850b233450d2",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "나가는 링크"
+            }
+          },
+          {
+            "id": "0c7fc3f46ed5752f",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "태그"
+            }
+          },
+          {
+            "id": "4617b78c8a9c6952",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "모든 속성"
+            }
+          },
+          {
+            "id": "eefaa35a020fc28f",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "개요"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:빠른 전환기 열기": false,
+      "graph:그래프 뷰 열기": false,
+      "canvas:새 캔버스 만들기": false,
+      "daily-notes:오늘의 일일 노트 열기": false,
+      "templates:템플릿 삽입": false,
+      "command-palette:명령어 팔레트 열기": false,
+      "bases:새 베이스 생성하기": false
+    }
+  },
+  "active": "0780a241951a983a",
+  "lastOpenFiles": [
+    "node_modules/next/dist/lib/worker.js.map",
+    "node_modules/next/dist/lib/worker.js",
+    "node_modules/next/dist/lib/worker.d.ts",
+    "node_modules/next/dist/lib/with-promise-cache.js.map",
+    "node_modules/next/dist/lib/with-promise-cache.js",
+    "node_modules/next/dist/lib/with-promise-cache.d.ts",
+    "node_modules/next/dist/lib/wait.js.map",
+    "node_modules/next/dist/lib/wait.js",
+    "node_modules/next/dist/lib/wait.d.ts",
+    "node_modules/next/dist/lib/verify-typescript-setup.js.map",
+    "node_modules/next/dist/lib/verify-typescript-setup.js",
+    "node_modules/eslint-plugin-react/README.md",
+    "node_modules/@typescript-eslint/eslint-plugin/README.md",
+    "node_modules/typescript/SECURITY.md",
+    "node_modules/typescript/README.md",
+    "node_modules/eslint-plugin-jsx-a11y/README.md",
+    "node_modules/aria-query/README.md",
+    "node_modules/eslint-plugin-jsx-a11y/LICENSE.md",
+    "node_modules/eslint-plugin-jsx-a11y/CHANGELOG.md",
+    "node_modules/eslint-plugin-jsx-a11y/docs/rules/tabindex-no-positive.md",
+    "node_modules/eslint-plugin-jsx-a11y/docs/rules/scope.md",
+    "node_modules/eslint-plugin-jsx-a11y/docs/rules/role-supports-aria-props.md",
+    "node_modules/eslint-plugin-jsx-a11y/docs/rules/role-has-required-aria-props.md",
+    "node_modules/eslint-plugin-jsx-a11y/docs/rules/prefer-tag-over-role.md",
+    "node_modules/eslint-plugin-jsx-a11y/docs/rules/no-static-element-interactions.md",
+    "node_modules/eslint-plugin-jsx-a11y/docs/rules/no-redundant-roles.md",
+    "node_modules/eslint-plugin-jsx-a11y/docs/rules/no-onchange.md",
+    "node_modules/eslint-plugin-jsx-a11y/docs/rules/no-noninteractive-tabindex.md",
+    "node_modules/eslint-plugin-jsx-a11y/docs/rules/no-noninteractive-element-to-interactive-role.md",
+    "node_modules/eslint-plugin-jsx-a11y/docs/rules/no-noninteractive-element-interactions.md",
+    "node_modules/eslint-plugin-jsx-a11y/docs/rules/no-interactive-element-to-noninteractive-role.md",
+    "node_modules/eslint-plugin-jsx-a11y/docs/rules/no-distracting-elements.md",
+    "node_modules/eslint-plugin-jsx-a11y/docs/rules/no-autofocus.md",
+    "node_modules/eslint-plugin-jsx-a11y/docs/rules/no-aria-hidden-on-focusable.md",
+    "node_modules/eslint-plugin-jsx-a11y/docs/rules/no-access-key.md",
+    "node_modules/eslint-plugin-jsx-a11y/docs/rules/mouse-events-have-key-events.md",
+    "public/window.svg",
+    "public/vercel.svg",
+    "public/next.svg",
+    "public/globe.svg",
+    "public/file.svg"
+  ]
+}
