@@ -124,10 +124,10 @@ export function ChatRoom({
           onMembersClick={
             room.type !== "dm" ? () => setShowMembers(!showMembers) : undefined
           }
-          usage={usage}
-          onClearContext={room.type === "ai" ? handleClearContext : undefined}
-          workingDir={workingDir}
-          onChangeDir={room.type === "ai" ? handleChangeDir : undefined}
+          usage={process.env.NEXT_PUBLIC_ENABLE_CLAUDE === "true" ? usage : null}
+          onClearContext={process.env.NEXT_PUBLIC_ENABLE_CLAUDE === "true" && room.type === "ai" ? handleClearContext : undefined}
+          workingDir={process.env.NEXT_PUBLIC_ENABLE_CLAUDE === "true" ? workingDir : ""}
+          onChangeDir={process.env.NEXT_PUBLIC_ENABLE_CLAUDE === "true" && room.type === "ai" ? handleChangeDir : undefined}
         />
 
         <MessageList

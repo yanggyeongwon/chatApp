@@ -10,10 +10,12 @@ import { cn } from "@/lib/utils"
 
 type FileItem = string
 
+const claudeEnabled = process.env.NEXT_PUBLIC_ENABLE_CLAUDE === "true"
+
 export function MessageInput({
   roomId,
   currentUserId,
-  hasBot = false,
+  hasBot: hasBotProp = false,
   botInvocationMode = "always",
   workingDir = "",
   onTyping,
@@ -25,6 +27,7 @@ export function MessageInput({
   workingDir?: string
   onTyping?: (typing: boolean) => void
 }) {
+  const hasBot = hasBotProp && claudeEnabled
   const [content, setContent] = useState("")
   const [sending, setSending] = useState(false)
   const [pastedImages, setPastedImages] = useState<File[]>([])

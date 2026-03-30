@@ -56,12 +56,15 @@ function SidebarContent() {
 
       <Separator />
 
-      {/* AI Room shortcut */}
-      <div className="px-2 py-1">
-        <CreateAIRoomButton />
-      </div>
-
-      <Separator />
+      {/* AI Room shortcut — 로컬에서만 표시 */}
+      {process.env.NEXT_PUBLIC_ENABLE_CLAUDE === "true" && (
+        <>
+          <div className="px-2 py-1">
+            <CreateAIRoomButton />
+          </div>
+          <Separator />
+        </>
+      )}
 
       <ScrollArea className="flex-1">
         <RoomList searchQuery={search} />
