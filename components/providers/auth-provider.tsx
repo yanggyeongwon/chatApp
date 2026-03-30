@@ -25,51 +25,48 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true)
   const supabase = createClient()
 
+  const fetchProfile = async (userId: string) => {
+    try {
+      const { data } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", userId)
+        .single()
+      setProfile(data)
+    } catch {
+      // ignore
+    }
+  }
+
   useEffect(() => {
     const getSession = async () => {
       try {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser()
-      setUser(user)
-
-      if (user) {
-        const { data } = await supabase
-          .from("profiles")
-          .select("*")
-          .eq("id", user.id)
-          .single()
-        setProfile(data)
+        const { data: { user } } = await supabase.auth.getUser()
+        setUser(user)
+        if (user) await fetchProfile(user.id)
+      } catch {
+        // ignore
       }
-
       setLoading(false)
-      } catch { setLoading(false) }
     }
 
     getSession()
 
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange(async (_event: string, session: { user: User } | null) => {
-      const currentUser = session?.user ?? null
-      setUser(currentUser)
-
-      if (currentUser) {
-        const { data } = await supabase
-          .from("profiles")
-          .select("*")
-          .eq("id", currentUser.id)
-          .single()
-        setProfile(data)
-      } else {
-        setProfile(null)
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (_event: string, session: { user: User } | null) => {
+        const currentUser = session?.user ?? null
+        setUser(currentUser)
+        if (currentUser) {
+          await fetchProfile(currentUser.id)
+        } else {
+          setProfile(null)
+        }
       }
-
-      setLoading(false)
-    })
+    )
 
     return () => subscription.unsubscribe()
-  }, [supabase])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const signOut = async () => {
     await supabase.auth.signOut()
