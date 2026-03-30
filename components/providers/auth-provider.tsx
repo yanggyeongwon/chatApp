@@ -41,9 +41,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const getSession = async () => {
       try {
-        const { data: { user } } = await supabase.auth.getUser()
-        setUser(user)
-        if (user) await fetchProfile(user.id)
+        // 5초 타임아웃 — SDK lock 무한 대기 방지
+        const result = await Promise.race([
+          supabase.auth.getUser(),
+          new Promise<null>((r) => setTimeout(() => r(null), 5000)),
+        ])
+        if (result && "data" in result) {
+          const u = result.data.user
+          setUser(u)
+          if (u) await fetchProfile(u.id)
+        }
       } catch {
         // ignore
       }
@@ -73,19 +80,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUser(null)
     setProfile(null)
     window.location.href = "/login"
-  }
-
-  if (loading) {
-    return (
-      <AuthContext.Provider value={{ user, profile, loading, signOut }}>
-        <div className="flex h-screen items-center justify-center">
-          <div className="flex flex-col items-center gap-3">
-            <div className="h-8 w-8 animate-spin rounded-full border-4 border-purple-200 border-t-purple-600" />
-            <p className="text-sm text-muted-foreground">로딩 중...</p>
-          </div>
-        </div>
-      </AuthContext.Provider>
-    )
   }
 
   return (
