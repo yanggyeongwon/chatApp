@@ -30,12 +30,13 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser()
 
-  // Protected routes: redirect to login if not authenticated
-  const isProtectedRoute =
-    request.nextUrl.pathname.startsWith("/chat") ||
-    request.nextUrl.pathname.startsWith("/profile")
+  // Public routes (인증 불필요)
+  const isPublicRoute =
+    request.nextUrl.pathname === "/login" ||
+    request.nextUrl.pathname.startsWith("/api/") ||
+    request.nextUrl.pathname.startsWith("/auth/")
 
-  if (!user && isProtectedRoute) {
+  if (!user && !isPublicRoute) {
     const url = request.nextUrl.clone()
     url.pathname = "/login"
     return NextResponse.redirect(url)
