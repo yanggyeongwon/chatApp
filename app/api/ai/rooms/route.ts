@@ -81,7 +81,7 @@ export async function POST(request: Request) {
         // 서버에 CLI 없음 — 로컬 에이전트 안내
         await supabase.from("messages").insert({
           room_id: roomId, sender_id: botProfileId,
-          content: `👋 **Claude Code 채팅방에 오신 것을 환영합니다!**\n\nAI 기능을 사용하려면 **로컬 에이전트**를 실행해야 합니다.\n\n**1단계: Claude Code CLI 설치**\n\`\`\`bash\nnpm install -g @anthropic-ai/claude-code\nclaude login\n\`\`\`\n\n**2단계: 에이전트 실행**\n\`\`\`bash\ncd ${process.cwd()}/agent\nnpm install\nnode index.js\n\`\`\`\n\n에이전트가 실행되면 이 채팅방에서 Claude Code를 사용할 수 있습니다.\n\n💡 **구독**: https://claude.ai/settings/billing (Pro $20/월)`,
+          content: `👋 **Claude Code 채팅방에 오신 것을 환영합니다!**\n\nAI 기능을 사용하려면 **로컬 에이전트**를 실행해야 합니다.\n\n**1단계: Claude Code CLI 설치**\n\`\`\`bash\nnpm install -g @anthropic-ai/claude-code\nclaude login\n\`\`\`\n\n**2단계: 프로젝트 클론 + 에이전트 실행**\n\`\`\`bash\ngit clone https://github.com/yanggyeongwon/chatApp.git\ncd chatApp/agent\nnpm install\nnode index.js\n\`\`\`\n\n에이전트가 실행되면 이 채팅방에서 Claude Code를 사용할 수 있습니다.\n\n💡 **구독**: https://claude.ai/settings/billing (Pro $20/월)`,
           type: "text", metadata: { is_bot: true, setup: true },
         })
       }
