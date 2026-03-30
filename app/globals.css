@@ -128,3 +128,11 @@
     @apply font-sans;
   }
 }
+
+/* macOS Electron 타이틀바 드래그 영역 */
+.electron-drag {
+  -webkit-app-region: drag;
+}
+.electron-no-drag {
+  -webkit-app-region: no-drag;
+}

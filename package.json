@@ -2,11 +2,51 @@
   "name": "chat-app",
   "version": "0.1.0",
   "private": true,
+  "main": "electron/main.js",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "electron:dev": "NODE_ENV=development electron .",
+    "electron:build": "next build && electron-builder",
+    "electron:pack": "next build && electron-builder --dir"
+  },
+  "build": {
+    "appId": "com.chatapp.desktop",
+    "productName": "ChatApp",
+    "directories": {
+      "output": "dist-electron"
+    },
+    "files": [
+      ".next/**/*",
+      "public/**/*",
+      "electron/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "target": ["dmg", "zip"],
+      "icon": "public/icon.png",
+      "category": "public.app-category.social-networking"
+    },
+    "win": {
+      "target": ["nsis"],
+      "icon": "public/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "linux": {
+      "target": ["AppImage", "deb"],
+      "category": "Chat"
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "your-github-username",
+      "repo": "chat-app"
+    }
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.80.0",
@@ -16,8 +56,11 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
+    "electron-updater": "^6.8.3",
     "lucide-react": "^1.0.1",
     "next": "16.2.1",
+    "pdf-parse": "^2.4.5",
+    "pdf-parse-new": "^2.0.0",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-markdown": "^10.1.0",
@@ -32,6 +75,8 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "electron": "^41.0.3",
+    "electron-builder": "^26.8.1",
     "eslint": "^9",
     "eslint-config-next": "16.2.1",
     "tailwindcss": "^4",
