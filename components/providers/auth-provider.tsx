@@ -75,6 +75,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     window.location.href = "/login"
   }
 
+  if (loading) {
+    return (
+      <AuthContext.Provider value={{ user, profile, loading, signOut }}>
+        <div className="flex h-screen items-center justify-center">
+          <div className="flex flex-col items-center gap-3">
+            <div className="h-8 w-8 animate-spin rounded-full border-4 border-purple-200 border-t-purple-600" />
+            <p className="text-sm text-muted-foreground">로딩 중...</p>
+          </div>
+        </div>
+      </AuthContext.Provider>
+    )
+  }
+
   return (
     <AuthContext.Provider value={{ user, profile, loading, signOut }}>
       {children}
