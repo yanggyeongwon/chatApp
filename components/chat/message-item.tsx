@@ -150,9 +150,11 @@ function StreamingIndicator({ startTime, content }: { startTime: string; content
 export function MessageItem({
   message,
   isOwn,
+  isUnread = false,
 }: {
   message: Message
   isOwn: boolean
+  isUnread?: boolean
 }) {
   // System messages (including webhook events)
   if (message.type === "system") {
@@ -212,12 +214,13 @@ export function MessageItem({
         <div className="relative group/bubble">
           <div
             className={cn(
-              "rounded-2xl px-3.5 py-2 text-sm leading-relaxed",
+              "rounded-2xl px-3.5 py-2 text-sm leading-relaxed transition-all",
               isOwn
                 ? "bg-primary text-primary-foreground rounded-br-md"
                 : isBot
                   ? "bg-purple-50 text-purple-900 border border-purple-200 rounded-bl-md"
-                  : "bg-muted rounded-bl-md"
+                  : "bg-muted rounded-bl-md",
+              isUnread && !isOwn && "shadow-md ring-1 ring-purple-200/60 scale-[1.01]"
             )}
           >
             {message.is_streaming && !message.content ? (

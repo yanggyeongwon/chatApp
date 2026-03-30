@@ -153,11 +153,18 @@ export function RoomItem({ room, onLeave }: { room: RoomWithPreview; onLeave?: (
         <div className="flex-1 min-w-0">
           <div className="flex items-center justify-between gap-2">
             <span className="text-sm font-medium truncate">{displayName}</span>
-            {timeAgo && (
-              <span className="text-[11px] text-muted-foreground flex-shrink-0 group-hover:hidden">
-                {timeAgo}
-              </span>
-            )}
+            <div className="flex items-center gap-1.5 flex-shrink-0">
+              {(room.unread_count ?? 0) > 0 && (
+                <span className="flex items-center justify-center h-5 min-w-5 px-1.5 rounded-full bg-red-500 text-white text-[10px] font-bold">
+                  {room.unread_count! > 99 ? "99+" : room.unread_count}
+                </span>
+              )}
+              {timeAgo && (
+                <span className="text-[11px] text-muted-foreground group-hover:hidden">
+                  {timeAgo}
+                </span>
+              )}
+            </div>
           </div>
           <div className="flex items-center gap-1.5">
             {room.type === "ai" && (

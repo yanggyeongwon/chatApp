@@ -22,6 +22,7 @@ export function RoomList({ searchQuery }: { searchQuery: string }) {
         .select(
           `
           room_id,
+          last_read_at,
           rooms (
             id, name, type, has_bot, avatar_url, last_message_at, created_at
           )
@@ -31,15 +32,23 @@ export function RoomList({ searchQuery }: { searchQuery: string }) {
         .order("joined_at", { ascending: false })
 
       if (data) {
-        type RoomMemberRow = { room_id: string; rooms: RoomWithPreview }
-        const roomList = (data as unknown as RoomMemberRow[])
-          .map((item: RoomMemberRow) => item.rooms)
+        type RoomMemberRow = { room_id: string; last_read_at: string; rooms: RoomWithPreview }
+        const rawList = data as unknown as RoomMemberRow[]
+        const roomList = rawList
+          .map((item) => item.rooms)
           .filter(Boolean)
-          .sort(
-            (a: RoomWithPreview, b: RoomWithPreview) =>
-              new Date(b.last_message_at).getTime() -
-              new Date(a.last_message_at).getTime()
-          )
+
+        // last_read_at 맵 생성
+        const readAtMap = new Map<string, string>()
+        for (const item of rawList) {
+          if (item.rooms) readAtMap.set(item.rooms.id, item.last_read_at)
+        }
+
+        roomList.sort(
+          (a: RoomWithPreview, b: RoomWithPreview) =>
+            new Date(b.last_message_at).getTime() -
+            new Date(a.last_message_at).getTime()
+        )
 
         // DM 방의 상대방 이름 조회
         const dmRooms = roomList.filter((r) => r.type === "dm")
@@ -64,6 +73,20 @@ export function RoomList({ searchQuery }: { searchQuery: string }) {
                 }
               }
             }
+          }
+        }
+
+        // 안 읽은 메시지 카운트 계산
+        for (const room of roomList) {
+          const lastRead = readAtMap.get(room.id)
+          if (lastRead) {
+            const { count } = await supabase
+              .from("messages")
+              .select("id", { count: "exact", head: true })
+              .eq("room_id", room.id)
+              .gt("created_at", lastRead)
+              .neq("sender_id", user.id)
+            room.unread_count = count ?? 0
           }
         }
 
