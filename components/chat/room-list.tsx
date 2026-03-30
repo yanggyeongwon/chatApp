@@ -17,12 +17,13 @@ export function RoomList({ searchQuery }: { searchQuery: string }) {
     const fetchRooms = async () => {
       try {
         const res = await fetch("/api/rooms/list")
+        if (!res.ok) return
         const data = await res.json()
-        if (data.rooms && data.rooms.length > 0) {
+        if (data.rooms) {
           setRooms(data.rooms as RoomWithPreview[])
         }
       } catch {
-        // ignore
+        // 에러 시 기존 유지
       }
       setLoading(false)
     }

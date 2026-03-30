@@ -4,7 +4,7 @@ import { createClient } from "@/lib/supabase/server"
 export async function GET() {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
-  if (!user) return NextResponse.json({ rooms: [] })
+  if (!user) return NextResponse.json({ rooms: [] }, { status: 401 })
 
   // 방 목록 + last_read_at
   const { data: memberships } = await supabase
