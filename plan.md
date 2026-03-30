@@ -308,11 +308,22 @@ npm run electron:build
 - [x] `pdf-parse-new`를 `serverExternalPackages`로 설정 (webpack 번들링 우회)
 - [x] 대용량 PDF 청킹 안전장치 (5000 청크 상한, 무한 루프 방지)
 
+### 17. 실시간 채팅 + 읽음 상태 (구현 완료)
+- [x] Supabase Realtime 메시지 구독 (SSE → postgres_changes)
+  - [x] INSERT/UPDATE 이벤트 자동 감지
+  - [x] Realtime 실패 시 3초 폴링 fallback
+- [x] 읽음 처리 API (`POST /api/messages/read`)
+  - [x] room_members.last_read_at 업데이트
+  - [x] 방 입장 시 자동 호출 + 탭 포커스 시 호출
+- [x] 안 읽은 메시지 카운트 (사이드바 빨간 뱃지, 99+ 표시)
+- [x] 안 읽은 메시지 스타일 (shadow-md + ring + scale 그림자 효과)
+- [x] 배포 버전 Claude 비활성화 (`NEXT_PUBLIC_ENABLE_CLAUDE` 환경변수)
+- [x] 로컬 에이전트 시스템 (agent/index.js — Supabase Realtime 기반)
+
 ## 미구현 / TODO
 - [ ] 벡터 임베딩 교체 (키워드 → voyage 모델, HNSW 인덱스 활용)
 - [ ] RAG 모델링 분석 대시보드
 - [ ] 온라인/오프라인 상태
-- [ ] 읽지 않은 메시지 카운트
 - [ ] 메시지 무한 스크롤 (이전 메시지 로드)
 
 

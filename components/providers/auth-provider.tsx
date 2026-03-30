@@ -59,6 +59,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     getSession()
 
+    // 5초 후에도 user가 없으면 로그인으로 리다이렉트
+    const checkTimer = setTimeout(() => {
+      if (!user && typeof window !== "undefined" && !window.location.pathname.includes("/login")) {
+        window.location.href = "/login"
+      }
+    }, 6000)
+
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (_event: string, session: { user: User } | null) => {
         const currentUser = session?.user ?? null
@@ -71,7 +78,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
     )
 
-    return () => subscription.unsubscribe()
+    return () => { subscription.unsubscribe(); clearTimeout(checkTimer) }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

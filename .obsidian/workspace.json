@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "a1bfa7b30a1c3f8d",
+        "id": "a029d0ed4277e2e1",
         "type": "tabs",
         "children": [
           {
-            "id": "0780a241951a983a",
+            "id": "ca0f1a79ed44023b",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "plan.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "plan"
+              "title": "새 탭"
             }
           }
         ]
@@ -180,8 +176,9 @@
       "bases:새 베이스 생성하기": false
     }
   },
-  "active": "0780a241951a983a",
+  "active": "ca0f1a79ed44023b",
   "lastOpenFiles": [
+    "plan.md",
     "app/api/messages/read/route.ts",
     "app/api/messages/read",
     "app/api/messages",
@@ -192,7 +189,6 @@
     "agent/node_modules/@supabase/auth-js/src/lib/webauthn.errors.ts",
     "agent/node_modules/@supabase/auth-js/src/lib/webauthn.dom.ts",
     "agent/node_modules/@supabase/auth-js/src/lib/web3",
-    "agent/node_modules/@supabase/auth-js/src/lib/version.ts",
     "agent/node_modules/@supabase/auth-js/README.md",
     "agent/node_modules/@supabase/storage-js/README.md",
     "agent/node_modules/@supabase/realtime-js/README.md",
