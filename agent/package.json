@@ -1,0 +1,12 @@
+{
+  "name": "chatapp-agent",
+  "version": "1.0.0",
+  "description": "ChatApp 로컬 에이전트 — Claude Code CLI를 서버와 연결",
+  "main": "index.js",
+  "bin": {
+    "chatapp-agent": "./index.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.100.0"
+  }
+}

@@ -174,6 +174,12 @@ export async function POST(request: Request) {
 
   const bot = (botConfig as unknown as { bots: { id: string; profile_id: string } }).bots
 
+  // 서버에 Claude CLI가 없으면 에이전트에 위임 (아무것도 안 함 — 에이전트가 Realtime으로 처리)
+  const cliStatus = checkSetupStatus()
+  if (!cliStatus.installed) {
+    return NextResponse.json({ status: "agent-mode", message: "Waiting for local agent" })
+  }
+
   const { data: latestMessage } = await supabase
     .from("messages")
     .select("content, sender:profiles!sender_id(username)")
