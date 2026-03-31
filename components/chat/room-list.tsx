@@ -14,13 +14,19 @@ export function RoomList({ searchQuery }: { searchQuery: string }) {
   useEffect(() => {
     if (!user) return
 
+    let lastHash = ""
     const fetchRooms = async () => {
       try {
         const res = await fetch("/api/rooms/list")
         if (!res.ok) return
         const data = await res.json()
         if (data.rooms) {
-          setRooms(data.rooms as RoomWithPreview[])
+          // 데이터가 같으면 업데이트 안 함 (리렌더링 방지)
+          const hash = JSON.stringify(data.rooms.map((r: RoomWithPreview) => `${r.id}:${r.last_message_at}:${r.unread_count ?? 0}`))
+          if (hash !== lastHash) {
+            lastHash = hash
+            setRooms(data.rooms as RoomWithPreview[])
+          }
         }
       } catch {
         // 에러 시 기존 유지

@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "a029d0ed4277e2e1",
+        "id": "d9ba752b8cf84d3b",
         "type": "tabs",
         "children": [
           {
-            "id": "ca0f1a79ed44023b",
+            "id": "d9f20eea768dc800",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -176,7 +176,7 @@
       "bases:새 베이스 생성하기": false
     }
   },
-  "active": "ca0f1a79ed44023b",
+  "active": "d9f20eea768dc800",
   "lastOpenFiles": [
     "app/api/rooms/list/route.ts",
     "app/api/rooms/list",
