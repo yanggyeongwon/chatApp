@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useAuth } from "@/lib/hooks/use-auth"
 import { RoomItem } from "@/components/chat/room-item"
 import { Skeleton } from "@/components/ui/skeleton"
@@ -8,38 +8,37 @@ import type { RoomWithPreview } from "@/lib/types/chat"
 
 export function RoomList({ searchQuery }: { searchQuery: string }) {
   const { user } = useAuth()
+  const userId = user?.id
   const [rooms, setRooms] = useState<RoomWithPreview[]>([])
   const [loading, setLoading] = useState(true)
+  const lastHashRef = useRef("")
 
   useEffect(() => {
-    if (!user) return
+    if (!userId) return
 
-    let lastHash = ""
-    const fetchRooms = async () => {
-      try {
-        const res = await fetch("/api/rooms/list")
-        if (!res.ok) return
-        const data = await res.json()
-        if (data.rooms) {
-          // 데이터가 같으면 업데이트 안 함 (리렌더링 방지)
-          const hash = JSON.stringify(data.rooms.map((r: RoomWithPreview) => `${r.id}:${r.last_message_at}:${r.unread_count ?? 0}`))
-          if (hash !== lastHash) {
-            lastHash = hash
-            setRooms(data.rooms as RoomWithPreview[])
+    const fetchRooms = () => {
+      fetch("/api/rooms/list")
+        .then((res) => {
+          if (!res.ok) throw new Error("not ok")
+          return res.json()
+        })
+        .then((data) => {
+          if (data.rooms) {
+            const hash = data.rooms.map((r: RoomWithPreview) => `${r.id}:${r.last_message_at}:${r.unread_count ?? 0}`).join("|")
+            if (hash !== lastHashRef.current) {
+              lastHashRef.current = hash
+              setRooms(data.rooms as RoomWithPreview[])
+            }
           }
-        }
-      } catch {
-        // 에러 시 기존 유지
-      }
-      setLoading(false)
+          setLoading(false)
+        })
+        .catch(() => { setLoading(false) })
     }
 
     fetchRooms()
-
-    // 5초마다 폴링
-    const interval = setInterval(fetchRooms, 5000)
+    const interval = setInterval(fetchRooms, 10000)
     return () => clearInterval(interval)
-  }, [user])
+  }, [userId])
 
   const filteredRooms = rooms.filter((room) => {
     if (!searchQuery) return true
@@ -50,7 +49,7 @@ export function RoomList({ searchQuery }: { searchQuery: string }) {
   if (loading) {
     return (
       <div className="space-y-2 p-3">
-        {Array.from({ length: 5 }).map((_, i) => (
+        {Array.from({ length: 3 }).map((_, i) => (
           <div key={i} className="flex items-center gap-3 p-2">
             <Skeleton className="h-10 w-10 rounded-full" />
             <div className="flex-1 space-y-1.5">
